@@ -18,5 +18,4 @@ public interface LibroRepositorio extends JpaRepository<Libro, Long> {
     List<Libro> findByAutor(Autor autor);
     List<Libro> findByGenero(LibroGenre genero);
     List<Libro> findByEstado(LibroStatus status);
-    
 }
