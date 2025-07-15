@@ -1,6 +1,7 @@
 package com.biblioteca.mi_biblioteca.Controladores;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,11 @@ public class AutorController {
     @GetMapping("/autores/{nombre}")
     public Autor obtenerAutorPorNombre(@PathVariable String nombre) {
         return autoresRepositorio.findByNombre(nombre);
+    }
+    
+    @GetMapping("/autores/id/{id}")
+    public Optional<Autor> obtenerAutorPorId(@PathVariable Long id) {
+        return autoresRepositorio.findById(id);
     }
     
     @GetMapping("/autores/{nombreAutor}/libros")

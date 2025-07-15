@@ -34,5 +34,9 @@ public class Libro {
     
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
+
+   @Lob
+    @Column(name = "portada", columnDefinition = "LONGBLOB")
+    private byte[] portada;
     
 }

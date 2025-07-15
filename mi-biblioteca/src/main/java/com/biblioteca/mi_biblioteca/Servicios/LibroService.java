@@ -47,4 +47,32 @@ public class LibroService {
         });
         return libro.orElse(null);
     }
+
+    public Libro actualizarLibro(Long id, String titulo, String autorNombre, LibroGenre genero,
+                                 LibroStatus estado, boolean comprado, int nota,
+                                 LocalDate fechaInicio, LocalDate fechaFin) {
+
+        // 1. Buscar el libro por ID
+        Libro libro = librosRepositorio.findById(id)
+                .orElseThrow(() -> new RuntimeException("Libro no encontrado"));
+
+        // 2. Buscar o crear el autor
+        var autor = autoresRepositorio.findByNombre(autorNombre);
+        if (autor == null) {
+            throw new RuntimeException("Autor no encontrado: " + autorNombre);
+        }
+
+        // 3. Actualizar campos
+        libro.setTitulo(titulo);
+        libro.setAutor(autor);
+        libro.setGenero(genero);
+        libro.setEstado(estado);
+        libro.setComprado(comprado);
+        libro.setNota(nota);
+        libro.setFechaInicio(fechaInicio);
+        libro.setFechaFin(fechaFin);
+
+        // 4. Guardar cambios
+        return librosRepositorio.save(libro);
+    }
 }
